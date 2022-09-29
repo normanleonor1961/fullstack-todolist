@@ -1,4 +1,4 @@
-package bong.fullstacktodolist;
+package com.example.fullstacktodolist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
