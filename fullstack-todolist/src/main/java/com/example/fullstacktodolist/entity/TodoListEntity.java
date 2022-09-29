@@ -1,0 +1,27 @@
+package com.example.fullstacktodolist.entity;
+
+import com.example.fullstacktodolist.config.SchemaConfiguration;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
+@Getter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@Builder
+@AllArgsConstructor
+@Setter
+@Table(schema = SchemaConfiguration.SCHEMA_NAME, name = "todolist")
+
+public class TodoListEntity {
+    @Id
+    private UUID todoId;
+    private String todo;
+    private ZonedDateTime createdDate;
+    private ZonedDateTime modifiedDate;
+}
