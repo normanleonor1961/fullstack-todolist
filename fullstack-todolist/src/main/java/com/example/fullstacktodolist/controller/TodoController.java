@@ -18,7 +18,7 @@ public class TodoController {
     private final TodoService todoService;
 
     @PutMapping("/addTodo/{newTodo}")
-    public List<TodoDTO> addTodo(@PathVariable @NonNull String newTodo){
+    public List<TodoDTO> addTodo(@PathVariable @NonNull String newTodo) {
         return todoService.addTodo(newTodo);
     }
 
@@ -36,4 +36,5 @@ public class TodoController {
     public List<TodoDTO> getAllTodo() {
         return todoService.getAllTodos();
     }
+
 }

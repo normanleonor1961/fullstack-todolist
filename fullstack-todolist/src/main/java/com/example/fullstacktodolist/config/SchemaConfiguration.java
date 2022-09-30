@@ -1,6 +1,6 @@
 package com.example.fullstacktodolist.config;
 
-public class SchemaConfiguration {
+public final class SchemaConfiguration {
 
     public static final String SCHEMA_NAME = "bong";
 

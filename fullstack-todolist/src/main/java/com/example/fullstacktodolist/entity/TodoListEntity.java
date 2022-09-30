@@ -13,11 +13,10 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
-@Setter
+@Setter(AccessLevel.NONE)
 @Table(schema = SchemaConfiguration.SCHEMA_NAME, name = "todolist")
-
 public class TodoListEntity {
     @Id
     private UUID todoId;

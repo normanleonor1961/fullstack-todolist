@@ -8,9 +8,8 @@ import com.example.fullstacktodolist.util.DateTimeUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-
 public class TodoService {
 
     private final DateTimeUtil dateTimeUtil;
@@ -79,7 +77,7 @@ public class TodoService {
     }
 
     public List<TodoDTO> getAllTodos() {
-        List<TodoListEntity> allTodos = todoRepository.findAll(Sort.by(Sort.Direction.ASC, "createdDate"));
+        List<TodoListEntity> allTodos = todoRepository.findAll();
         List<TodoDTO> updatedList = new ArrayList<>();
 
         allTodos.forEach(data -> {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actionTodo from "../redux/actions/actionTodo";
@@ -9,11 +9,15 @@ export default function TodoBody() {
   const update = useSelector((state) => state.update);
   const [editInput, setEditInput] = useState(update ? update.text : "");
 
-  const { removeTodo } = bindActionCreators(actionTodo, useDispatch());
-  const { setUpdateTodo, saveUpdateTodo } = bindActionCreators(
-    actionUpdate,
+  const { getAllTodo, removeTodo, updateTodo } = bindActionCreators(
+    actionTodo,
     useDispatch()
   );
+  const { setUpdateTodo } = bindActionCreators(actionUpdate, useDispatch());
+
+  useEffect(() => {
+    getAllTodo();
+  }, []);
 
   const setUpdate = (todo) => {
     setUpdateTodo(todo);
@@ -21,33 +25,33 @@ export default function TodoBody() {
   };
 
   const saveUpdate = (id) => {
-    const updatedTodo = { id, text: editInput };
-    saveUpdateTodo(updatedTodo);
+    const body = { todoId: id, todo: editInput };
+    updateTodo(body);
   };
 
-  return todos.map((todo, index) => (
+  return todos.map((data, index) => (
     <div id="tasks" key={index}>
       <div className="task">
         <div className="content">
           <input
             className="text"
-            value={update.id !== todo.id ? todo.text : editInput}
+            value={update.todoId !== data.todoId ? data.todo : editInput}
             onChange={(e) => setEditInput(e.target.value)}
-            readOnly={update.id !== todo.id}
+            readOnly={update.todoId !== data.todoId}
           />
         </div>
         <div className="actions">
-          {update.id !== todo.id ? (
-            <button className="edit" onClick={() => setUpdate(todo)}>
+          {update.todoId !== data.todoId ? (
+            <button className="edit" onClick={() => setUpdate(data)}>
               Edit
             </button>
           ) : (
-            <button className="edit" onClick={() => saveUpdate(todo.id)}>
+            <button className="edit" onClick={() => saveUpdate(data.todoId)}>
               Save
             </button>
           )}
-          {update.id !== todo.id && (
-            <button className="delete" onClick={() => removeTodo(todo.id)}>
+          {update.todoId !== data.todoId && (
+            <button className="delete" onClick={() => removeTodo(data.todoId)}>
               Delete
             </button>
           )}

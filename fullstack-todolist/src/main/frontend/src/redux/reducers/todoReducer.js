@@ -2,12 +2,10 @@ const initialState = [];
 
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
-            case 'ADD_TODO':
-                return [action.payload, ...state]
-            case 'REMOVE_TODO':
-                return [...state].filter((todo) => todo.id !== action.payload);
+            case 'SET_TODOLIST':
+                return state = action.payload;
             case 'SAVE_UPDATE_TODO':
-                return state = [...state].map((item) => item.id === action.payload.id ? action.payload : item);
+                return state = action.payload;
             default:
                 return state;
     }
